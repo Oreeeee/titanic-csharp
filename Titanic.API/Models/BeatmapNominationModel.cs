@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Titanic.API.Models
 {
-    public class NominationModel
+    public class BeatmapNominationModel
     {
         [JsonProperty("set_id")]
         public int SetId { get; set; }
