@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{5AB9CF1F-A5A6-4A07-91E3-5FBFAB2983FD}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>Titanic.API</RootNamespace>
+        <AssemblyName>Titanic.API</AssemblyName>
+        <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+		<LangVersion>12.0</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+          <HintPath>packages\Newtonsoft.Json.13.0.4\lib\net20\Newtonsoft.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="System"/>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.Xml"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="APIRequest.cs" />
+        <Compile Include="Constants\OnlineBeatmapStatus.cs" />
+        <Compile Include="Models\AchievementModel.cs" />
+        <Compile Include="Models\BadgeModel.cs" />
+        <Compile Include="Models\BeatmapModelCompact.cs" />
+        <Compile Include="Models\BeatmapSetMetadataUpdateModel.cs" />
+        <Compile Include="Models\BeatmapSetModel.cs" />
+        <Compile Include="Models\BenchmarkHardwareModel.cs" />
+        <Compile Include="Models\BenchmarkModel.cs" />
+        <Compile Include="Models\BenchmarkSubmissionModel.cs" />
+        <Compile Include="Models\FavouritesModel.cs" />
+        <Compile Include="Models\GroupModel.cs" />
+        <Compile Include="Models\MessageModel.cs" />
+        <Compile Include="Models\NameHistoryModel.cs" />
+        <Compile Include="Models\NominationModel.cs" />
+        <Compile Include="Models\PrivateMessageModel.cs" />
+        <Compile Include="Models\RelationshipModel.cs" />
+        <Compile Include="Models\RequestErrorModel.cs" />
+        <Compile Include="Models\ScoreModel.cs" />
+        <Compile Include="Models\ServerStatsModel.cs" />
+        <Compile Include="Models\StatsModel.cs" />
+        <Compile Include="Models\TokenModel.cs" />
+        <Compile Include="Models\UserModel.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Requests\AccountProfileRequest.cs" />
+        <Compile Include="Requests\BeatmapLookupRequest.cs" />
+        <Compile Include="Requests\BeatmapNominationListRequest.cs" />
+        <Compile Include="Requests\BeatmapNominationRequest.cs" />
+        <Compile Include="Requests\BeatmapNominationResetRequest.cs" />
+        <Compile Include="Requests\BeatmapRequest.cs" />
+        <Compile Include="Requests\BeatmapSetMetadataUpdateRequest.cs" />
+        <Compile Include="Requests\BeatmapSetRequest.cs" />
+        <Compile Include="Requests\BeatmapSetStatusUpdateRequest.cs" />
+        <Compile Include="Requests\BenchmarkScoresRequest.cs" />
+        <Compile Include="Requests\BenchmarkSubmissionRequest.cs" />
+        <Compile Include="Requests\ChannelMessageHistoryRequest.cs" />
+        <Compile Include="Requests\GetScoreRequest.cs" />
+        <Compile Include="Requests\LoginRequest.cs" />
+        <Compile Include="Requests\PrivateMessageHistoryRequest.cs" />
+        <Compile Include="Requests\RefreshTokenRequest.cs" />
+        <Compile Include="Requests\ServerStatsRequest.cs" />
+        <Compile Include="TitanicAPI.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="packages.config" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>
