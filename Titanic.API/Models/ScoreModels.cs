@@ -3,7 +3,28 @@ using Newtonsoft.Json;
 
 namespace Titanic.API.Models
 {
-    public class ScoreModel
+    public class ScoreModel : ScoreModelCompact
+    {
+        [JsonProperty("beatmap")]
+        public BeatmapModel Beatmap { get; set; }
+
+        [JsonProperty("user")]
+        public UserModel User { get; set; }
+    }
+
+    public class ScoreModelWithoutBeatmap : ScoreModelCompact
+    {
+        [JsonProperty("user")]
+        public UserModelCompact User { get; set; }
+    }
+
+    public class ScoreModelWithoutUser : ScoreModelCompact
+    {
+        [JsonProperty("beatmap")]
+        public BeatmapModel Beatmap { get; set; }
+    }
+
+    public class ScoreModelCompact
     {
         [JsonProperty("id")]
         public long Id { get; set; }
@@ -82,11 +103,11 @@ namespace Titanic.API.Models
 
         [JsonProperty("failtime")]
         public int? Failtime { get; set; }
+    }
 
-        [JsonProperty("beatmap")]
-        public BeatmapModel Beatmap { get; set; }
-
-        [JsonProperty("user")]
-        public UserModel User { get; set; }
+    public class ScorePinRequest
+    {
+        [JsonProperty("score_id")]
+        public long ScoreId { get; set; }
     }
 }
