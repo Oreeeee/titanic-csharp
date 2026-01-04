@@ -1,7 +1,6 @@
 ﻿#nullable enable
 using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Titanic.API.Models
 {
@@ -14,7 +13,7 @@ namespace Titanic.API.Models
         public UserModel? Sender { get; set; }
 
         [JsonProperty("message")]
-        public string Message { get; set; }
+        public string Message { get; set; } = string.Empty;
 
         [JsonProperty("time")]
         public DateTime CreatedAt { get; set; }
