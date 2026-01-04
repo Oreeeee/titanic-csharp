@@ -23,8 +23,7 @@ namespace Titanic.API.Requests
                 { "Authorization", $"Basic {Convert.ToBase64String(Encoding.UTF8.GetBytes($"{Username}:{Password}"))}" }
             });
             api.Token = response;
-            api.Token.ExpiresAt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            api.Token.ExpiresAt = api.Token.ExpiresAt.AddSeconds(api.Token.ExpiresIn).ToLocalTime();
+            api.Token.ExpiresAt = DateTime.UtcNow.AddSeconds(api.Token.ExpiresIn).ToLocalTime();
             return response;
         }
     }
