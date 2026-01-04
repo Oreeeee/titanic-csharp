@@ -5,7 +5,7 @@ using Titanic.API.Models;
 
 namespace Titanic.API.Requests
 {
-    internal class BeatmapSetRequest : APIRequest<BeatmapSetModel>
+    public class BeatmapSetRequest : APIRequest<BeatmapSetModel>
     {
         public int SetId { get; }
 
