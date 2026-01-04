@@ -55,7 +55,10 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Pack
-        run: dotnet pack Titanic.API/Titanic.API.csproj -c Release --no-build -o ./nupkg -p:PackageVersion=${{ steps.version.outputs.version }}
+        run: dotnet pack Titanic.API/Titanic.API.csproj -c Release -o ./nupkg -p:PackageVersion=${{ steps.version.outputs.version }}
+
+      - name: List packages
+        run: Get-ChildItem -Path ./nupkg -Recurse
 
       - name: Push to GitHub Packages
         run: dotnet nuget push ./nupkg/*.nupkg --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
