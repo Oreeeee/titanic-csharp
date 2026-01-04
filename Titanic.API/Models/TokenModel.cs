@@ -20,4 +20,13 @@ namespace Titanic.API.Models
         public int ExpiresIn { get; set; }
         public DateTime ExpiresAt { get; set; }
     }
+
+    public class IrcTokenModel
+    {
+        [JsonProperty("username")]
+        public string Username { get; set; }
+
+        [JsonProperty("token")]
+        public string Token { get; set; }
+    }
 }
