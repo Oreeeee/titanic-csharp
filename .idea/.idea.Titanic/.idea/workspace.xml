@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30de0179-58a8-4285-bc75-e1d7aa6c739d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Titanic/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Titanic/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Titanic.Updater.Tests/Titanic.Updater.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Titanic.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Titanic.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,10 +13,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="37o5HJ1ZTpoMRQRyQHoP9P5Y2Lk" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -28,6 +29,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "/work/titanic-csharp/Tests.Core/Tests.Core.csproj",
     "settings.editor.selected.configurable": "preferences.sourceCode.C#",
     "vue.rearranger.settings.migration": "true"
   }
@@ -40,6 +42,7 @@
       <option name="presentableId" value="Default" />
       <updated>1767556496399</updated>
       <workItem from="1767556504095" duration="864000" />
+      <workItem from="1767718217644" duration="135000" />
     </task>
     <servers />
   </component>

@@ -1,0 +1,29 @@
+name: Upload package to NuGet
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  build:
+    name: Upload package to NuGet
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+      - name: Restore
+        run: dotnet restore
+      - name: Set VERSION variable from tag
+        run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+      - name: Build
+        run: dotnet build -c Release --no-restore /p:Version=${VERSION} /p:PackageVersion=${VERSION}
+      - name: Pack
+        run: dotnet pack -c Release /p:Version=${VERSION} --no-restore --no-build
+      - name: Upload Package
+        run: dotnet nuget push Titanic.Updater/bin/Release/Titanic.Updater.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_TOKEN}
+        env:
+          NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
