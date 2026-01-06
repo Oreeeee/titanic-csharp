@@ -44,9 +44,9 @@ jobs:
           fi
           echo "version=$VERSION" >> $GITHUB_OUTPUT
       - name: Build
-        run: dotnet build -c Release --no-restore /p:Version=${VERSION} /p:PackageVersion=${VERSION}
+        run: dotnet build -c Release --no-restore /p:Version=${{ steps.version.outputs.version }} /p:PackageVersion=${{ steps.version.outputs.version }}
       - name: Pack
-        run: dotnet pack -c Release /p:Version=${VERSION} --no-restore --no-build -o ./nupkg
+        run: dotnet pack -c Release /p:Version=${{ steps.version.outputs.version }} --no-restore --no-build -o ./nupkg
       - name: List packages
         run: ls -lAh nupkg
       - name: Upload Package
