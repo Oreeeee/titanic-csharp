@@ -16,31 +16,21 @@ env:
 
 jobs:
   publish:
-    runs-on: windows-latest
+    name: Publish NuGet Package
+    runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v6
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: |
             8.0.x
             9.0.x
-
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
-
-      - name: Restore dependencies
-        run: dotnet restore Titanic.API/Titanic.API.csproj
-
-      - name: Build
-        run: dotnet build Titanic.API/Titanic.API.csproj -c Release --no-restore
-
+            10.0.x
+      - name: Restore
+        run: dotnet restore
       - name: Determine version
         id: version
         shell: bash
@@ -53,16 +43,13 @@ jobs:
             VERSION="${{ github.event.inputs.version }}"
           fi
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-
+      - name: Build
+        run: dotnet build -c Release --no-restore /p:Version=${{ steps.version.outputs.version }} /p:PackageVersion=${{ steps.version.outputs.version }}
       - name: Pack
-        run: dotnet pack Titanic.API/Titanic.API.csproj -c Release -o ./nupkg -p:PackageVersion=${{ steps.version.outputs.version }}
-
+        run: dotnet pack -c Release /p:Version=${{ steps.version.outputs.version }} --no-restore --no-build -o ./nupkg
       - name: List packages
-        run: Get-ChildItem -Path ./nupkg -Recurse
-
-      - name: Push to NuGet
-        run: |
-          $packages = Get-ChildItem -Path ./nupkg -Filter *.nupkg
-          foreach ($package in $packages) {
-            dotnet nuget push $package.FullName --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
-          }
+        run: ls -lAh nupkg
+      - name: Upload Package
+        run: find ./nupkg -name "*.nupkg" -exec dotnet nuget push {} --source https://api.nuget.org/v3/index.json --api-key ${NUGET_TOKEN} --skip-duplicate \;
+        env:
+          NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
