@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Serialization;
+using Titanic.API.Http;
 using Titanic.Updater.Models;
 
 namespace Titanic.Updater.Http;

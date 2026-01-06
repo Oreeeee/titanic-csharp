@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using Newtonsoft.Json;
+using Titanic.API.Http;
 using Titanic.API.Models;
 using Titanic.API.Requests;
 
@@ -11,7 +12,11 @@ namespace Titanic.API
 {
     public class TitanicAPI
     {
-        private readonly WebClient client;
+        private readonly WebClient _client;
+#pragma warning disable CA1859
+        private readonly IHttpInterface _http;
+#pragma warning restore CA1859
+
         public TokenModel Token;
 
         public bool IsLoggedIn => Token != null;
@@ -19,18 +24,24 @@ namespace Titanic.API
 
         public TitanicAPI(string baseUrl = "https://api.titanic.sh")
         {
-            client = new WebClient();
-            client.BaseAddress = baseUrl;
+#if SUPPORT_HTTPCLIENT
+            this._http = new HttpClientInterface(baseUrl);
+#else
+            this._http = new WebClientInterface(baseUrl);
+#endif
+            
+            _client = new WebClient();
+            _client.BaseAddress = baseUrl;
         }
 
         public T Get<T>(string endpoint, Dictionary<string, string> headers = null)
         {
             Debug.Print("TitanicAPI: GET " + endpoint);
 
-            lock (client)
+            lock (_client)
             {
                 PrepareRequest(headers);
-                string responseJson = client.DownloadString(endpoint);
+                string responseJson = _client.DownloadString(endpoint);
                 return JsonConvert.DeserializeObject<T>(responseJson);
             }
         }
@@ -39,12 +50,12 @@ namespace Titanic.API
         {
             Debug.Print("TitanicAPI: POST " + endpoint);
 
-            lock (client)
+            lock (_client)
             {
                 // NOTE: we skip token checking for the refresh endpoint to avoid infinite loops
                 PrepareRequest(headers, endpoint != "/account/refresh");
                 string json = JsonConvert.SerializeObject(data);
-                string responseJson = client.UploadString(endpoint, "POST", json);
+                string responseJson = _client.UploadString(endpoint, "POST", json);
                 return JsonConvert.DeserializeObject<T>(responseJson);
             }
         }
@@ -53,11 +64,11 @@ namespace Titanic.API
         {
             Debug.Print("TitanicAPI: PUT " + endpoint);
 
-            lock (client)
+            lock (_client)
             {
                 PrepareRequest(headers);
                 string json = JsonConvert.SerializeObject(data);
-                string responseJson = client.UploadString(endpoint, "PUT", json);
+                string responseJson = _client.UploadString(endpoint, "PUT", json);
                 return JsonConvert.DeserializeObject<T>(responseJson);
             }
         }
@@ -66,24 +77,24 @@ namespace Titanic.API
         {
             Debug.Print("TitanicAPI: PATCH " + endpoint);
 
-            lock (client)
+            lock (_client)
             {
                 PrepareRequest(headers);
                 string json = JsonConvert.SerializeObject(data);
 
                 // WebClient does not support Patch, so we need to build the request manually
-                Uri requestUrl = new Uri(new Uri(client.BaseAddress), endpoint);
+                Uri requestUrl = new Uri(new Uri(_client.BaseAddress), endpoint);
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUrl);
                 request.Method = "PATCH";
                 request.ContentType = "application/json";
 
                 // Copy across the headers (like Authorization) from our WebClient to the request
-                foreach (string headerKey in client.Headers.AllKeys)
+                foreach (string headerKey in _client.Headers.AllKeys)
                 {
                     if (headerKey.Equals("Authorization", StringComparison.OrdinalIgnoreCase))
-                        request.Headers[HttpRequestHeader.Authorization] = client.Headers[headerKey];
+                        request.Headers[HttpRequestHeader.Authorization] = _client.Headers[headerKey];
                     else
-                        request.Headers[headerKey] = client.Headers[headerKey];
+                        request.Headers[headerKey] = _client.Headers[headerKey];
                 }
 
                 // Write JSON body
@@ -103,10 +114,10 @@ namespace Titanic.API
         {
             Debug.Print("TitanicAPI: DELETE " + endpoint);
 
-            lock (client)
+            lock (_client)
             {
                 PrepareRequest(headers);
-                string responseJson = client.UploadString(endpoint, "DELETE", "");
+                string responseJson = _client.UploadString(endpoint, "DELETE", "");
                 return JsonConvert.DeserializeObject<T>(responseJson);
             }
         }
@@ -116,17 +127,17 @@ namespace Titanic.API
             if (checkToken)
                 EnsureValidAccessToken();
 
-            client.Headers.Clear();
+            _client.Headers.Clear();
 
             if (Token != null)
-                client.Headers["Authorization"] = $"Bearer {Token.AccessToken}";
+                _client.Headers["Authorization"] = $"Bearer {Token.AccessToken}";
             
             if (headers == null)
                 return;
 
             foreach (KeyValuePair<string, string> header in headers)
             {
-                client.Headers[header.Key] = header.Value;
+                _client.Headers[header.Key] = header.Value;
             }
         }
 

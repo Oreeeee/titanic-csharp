@@ -1,8 +1,10 @@
 #if !SUPPORT_HTTPCLIENT
+using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace Titanic.Updater.Http;
+namespace Titanic.API.Http;
 
 public class WebClientInterface : IHttpInterface
 {
