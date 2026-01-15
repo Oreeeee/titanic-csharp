@@ -32,11 +32,7 @@ namespace Titanic.API
 
         public TitanicAPI(string baseUrl = "https://api.titanic.sh")
         {
-#if SUPPORT_HTTPCLIENT
-            this._http = new HttpClientInterface(baseUrl);
-#else
-            this._http = new WebClientInterface(baseUrl);
-#endif
+            this._http = HttpInterfaceFactory.Create(baseUrl);
         }
         
         private static readonly JsonSerializerSettings _settings = new()
