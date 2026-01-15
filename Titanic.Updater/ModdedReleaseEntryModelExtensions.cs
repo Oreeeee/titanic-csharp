@@ -16,7 +16,7 @@ public static class ModdedReleaseEntryModelExtensions
             Uri.TryCreate(entry.DownloadUrl, UriKind.Absolute, out Uri? uri) &&
             uri.Host.Contains("mediafire.com");
 
-        public bool ResolveDownloadUrl()
+        public bool ResolveExternalDownloadUrls()
         {
             if (!entry.IsMediafireDownload)
                 return false;
