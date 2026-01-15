@@ -55,6 +55,9 @@ public class UpdateManager : IDisposable
 
     public DownloadedUpdate DownloadClientUpdate(ModdedClientInformation info, ModdedReleaseEntryModel entry)
     {
+        // Try to resolve download URLs, e.g. mediafire links -> direct download links
+        entry.ResolveDownloadUrl();
+
         if (!entry.IsExtractable)
             throw new Exception("Update is not extractable (not a .zip), check entry.IsExtractable and prompt the user to open the entry.DownloadUrl instead or repackage your updates");
 
