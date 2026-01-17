@@ -42,10 +42,10 @@ namespace Titanic.API.Models
         public string Tags { get; set; }
 
         [JsonProperty("language_id")]
-        public int LanguageId { get; set; }
+        public BeatmapLanguage Language { get; set; }
 
         [JsonProperty("genre_id")]
-        public int GenreId { get; set; }
+        public BeatmapGenre Genre { get; set; }
 
         [JsonProperty("offset")]
         public int Offset { get; set; }
