@@ -48,8 +48,16 @@ namespace Titanic.API
             if (checkToken)
                 EnsureValidAccessToken();
             
-            string jsonContent = JsonConvert.SerializeObject(content, _settings);
-            string str = this._http.RequestString(methodType, endpoint, jsonContent, headers);
+            string jsonContent = null;
+            
+            // Only serialize content for methods that support a body
+            if (content != null && methodType != HttpMethodType.GET)
+                jsonContent = JsonConvert.SerializeObject(content, _settings);
+            
+            string str = this._http.RequestString(
+                methodType, endpoint,
+                jsonContent, headers
+            );
 
             T obj = JsonConvert.DeserializeObject<T>(str, _settings);
             if (obj == null)
