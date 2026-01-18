@@ -103,26 +103,32 @@ namespace Titanic.API.Models
 
     public class ModdedReleaseModel
     {
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
         [JsonProperty("name")]
         public string Name { get; set; }
 
         [JsonProperty("description")]
         public string Description { get; set; }
-
-        [JsonProperty("icon_url")]
-        public string IconUrl { get; set; }
-
-        [JsonProperty("creator")]
-        public UserModelCompact Creator { get; set; }
+        
+        [JsonProperty("creator_id")]
+        public int? CreatorId { get; set; }
+        
+        [JsonProperty("topic_id")]
+        public int? TopicId { get; set; }
+        
+        [JsonProperty("client_version")]
+        public int ClientVersion { get; set; }
+        
+        [JsonProperty("client_extension")]
+        public string ClientExtension { get; set; }
 
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }
-
-        [JsonProperty("updated_at")]
-        public DateTime UpdatedAt { get; set; }
+        
+        [Obsolete("Use ClientExtension instead.")]
+        public string Identifier => ClientExtension;
+        
+        [Obsolete("Use CreatorId instead.", true)]
+        public UserModel Creator { get; set; }
     }
 
     public class ModdedReleaseEntryModel
@@ -144,6 +150,12 @@ namespace Titanic.API.Models
 
         [JsonProperty("download_url")]
         public string DownloadUrl { get; set; }
+        
+        [JsonProperty("update_url")]
+        public string UpdateUrl { get; set; }
+        
+        [JsonProperty("postId")]
+        public int? PostId { get; set; }
 
         [JsonProperty("changelog")]
         public string Changelog { get; set; }
