@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Titanic.Updater", "Titanic.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Titanic.Updater.Tests", "Titanic.Updater.Tests\Titanic.Updater.Tests.csproj", "{6B3551FC-9C6A-4F68-859D-E47B8AC02C04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Titanic.Updater.TestApp", "Titanic.Updater.TestApp\Titanic.Updater.TestApp.csproj", "{7853B10D-28E7-4A16-BF34-97FD196C5648}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,18 @@ Global
 		{6B3551FC-9C6A-4F68-859D-E47B8AC02C04}.Release|x64.Build.0 = Release|Any CPU
 		{6B3551FC-9C6A-4F68-859D-E47B8AC02C04}.Release|x86.ActiveCfg = Release|Any CPU
 		{6B3551FC-9C6A-4F68-859D-E47B8AC02C04}.Release|x86.Build.0 = Release|Any CPU
+		{7853B10D-28E7-4A16-BF34-97FD196C5648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7853B10D-28E7-4A16-BF34-97FD196C5648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7853B10D-28E7-4A16-BF34-97FD196C5648}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7853B10D-28E7-4A16-BF34-97FD196C5648}.Debug|x64.Build.0 = Debug|Any CPU
+		{7853B10D-28E7-4A16-BF34-97FD196C5648}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7853B10D-28E7-4A16-BF34-97FD196C5648}.Debug|x86.Build.0 = Debug|Any CPU
+		{7853B10D-28E7-4A16-BF34-97FD196C5648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7853B10D-28E7-4A16-BF34-97FD196C5648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7853B10D-28E7-4A16-BF34-97FD196C5648}.Release|x64.ActiveCfg = Release|Any CPU
+		{7853B10D-28E7-4A16-BF34-97FD196C5648}.Release|x64.Build.0 = Release|Any CPU
+		{7853B10D-28E7-4A16-BF34-97FD196C5648}.Release|x86.ActiveCfg = Release|Any CPU
+		{7853B10D-28E7-4A16-BF34-97FD196C5648}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

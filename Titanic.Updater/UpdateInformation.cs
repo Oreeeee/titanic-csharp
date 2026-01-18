@@ -19,17 +19,19 @@ public class UpdateInformation
     }
 
     public readonly string ClientIdentifier;
+    public readonly string Version;
 
-    public UpdateInformation(ModdedReleaseEntryModel moddedRelease) : this(moddedRelease.DownloadUrl, moddedRelease.Version)
+    public UpdateInformation(ModdedReleaseEntryModel moddedEntry, string identifier) : this(moddedEntry.DownloadUrl, identifier, moddedEntry.Version)
     {}
 
-    public UpdateInformation(TitanicReleaseModel titanicRelease) : this(titanicRelease.Downloads.First(), titanicRelease.Name)
+    public UpdateInformation(TitanicReleaseModel titanicRelease) : this(titanicRelease.Downloads.First(), titanicRelease.Name, titanicRelease.Name)
     {}
 
-    public UpdateInformation(string downloadUrl, string clientIdentifier)
+    public UpdateInformation(string downloadUrl, string clientIdentifier, string version)
     {
         this.DownloadUrl = downloadUrl;
         this.ClientIdentifier = clientIdentifier;
+        this.Version = version;
         
         // Try to resolve external download URLs, e.g. mediafire links -> direct download links
         this.ResolveExternalDownloadUrls();

@@ -44,7 +44,7 @@ public class UpdateManager : IDisposable
             ModdedReleaseEntryModel? entry = entries.FirstOrDefault();
             if (entry == null)
                 return null;
-            return new UpdateInformation(entry);
+            return new UpdateInformation(entry, clientInfo.ClientIdentifier);
         }
 
         OsuVersion currentVersion = OsuVersion.Parse(clientInfo.InstalledVersion, clientInfo.VersionKind);
@@ -52,7 +52,7 @@ public class UpdateManager : IDisposable
         {
             OsuVersion version = OsuVersion.Parse(entry.Version, clientInfo.VersionKind);
             if (currentVersion.IsOlderThan(version))
-                return new UpdateInformation(entry);
+                return new UpdateInformation(entry, clientInfo.ClientIdentifier);
         }
 
         return null;
