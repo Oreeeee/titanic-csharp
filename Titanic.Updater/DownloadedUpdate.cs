@@ -2,7 +2,7 @@ namespace Titanic.Updater;
 
 public class DownloadedUpdate
 {
-    public ModdedClientInformation Client;
+    public string ClientIdentifier;
     public string Filename;
     public string Path;
 }
