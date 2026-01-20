@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 
 namespace Titanic.API.Http;
 
@@ -46,7 +47,7 @@ public class HttpClientInterface : IHttpInterface
 
         if (content != null)
         {
-            request.Content = new StringContent(content);
+            request.Content = new StringContent(content, Encoding.UTF8, "application/json");
         }
 
         #if NET5_0_OR_GREATER

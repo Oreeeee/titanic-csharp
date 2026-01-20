@@ -56,7 +56,11 @@ namespace Titanic.API
             
             // Only serialize content for methods that support a body
             if (content != null && methodType != HttpMethodType.GET)
+            {
                 jsonContent = JsonConvert.SerializeObject(content, _settings);
+                headers ??= new Dictionary<string, string>();
+                headers["Content-Type"] = "application/json";
+            }
             
             string str = this._http.RequestString(
                 methodType, endpoint,
