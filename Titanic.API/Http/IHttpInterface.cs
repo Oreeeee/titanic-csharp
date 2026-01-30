@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace Titanic.API.Http;
 
+#nullable enable
+
 public interface IHttpInterface : IDisposable
 {
     string RequestString(HttpMethodType methodType, string endpoint, string? content, Dictionary<string, string>? headers);
