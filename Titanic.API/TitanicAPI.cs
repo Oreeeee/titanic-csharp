@@ -12,10 +12,14 @@ namespace Titanic.API
 {
     public class TitanicAPI : IDisposable
     {
-        #if NET10_0_OR_GREATER
-        private const DynamicallyAccessedMemberTypes types = DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.AllProperties;
-        #elif NET8_0_OR_GREATER
-        private const DynamicallyAccessedMemberTypes types = DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicProperties;
+        #if NET8_0_OR_GREATER
+        private const DynamicallyAccessedMemberTypes types = DynamicallyAccessedMemberTypes.PublicConstructors |
+                                                             DynamicallyAccessedMemberTypes.NonPublicConstructors |
+                                                             DynamicallyAccessedMemberTypes.PublicParameterlessConstructor |
+                                                             DynamicallyAccessedMemberTypes.PublicProperties |
+                                                             DynamicallyAccessedMemberTypes.NonPublicProperties |
+                                                             DynamicallyAccessedMemberTypes.PublicMethods |
+                                                             DynamicallyAccessedMemberTypes.NonPublicMethods;
         #endif
         
 #pragma warning disable CA1859
