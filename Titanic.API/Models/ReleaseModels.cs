@@ -166,4 +166,37 @@ namespace Titanic.API.Models
         [JsonProperty("updated_at")]
         public DateTime UpdatedAt { get; set; }
     }
+
+    public class ModdedReleaseUploadRequest
+    {
+        [JsonProperty("version")]
+        public string Version { get; set; }
+
+        [JsonProperty("stream")]
+        public string Stream { get; set; }
+
+        [JsonProperty("checksum")]
+        public string Checksum { get; set; }
+
+        [JsonProperty("download_url")]
+        public string DownloadUrl { get; set; }
+        
+        [JsonProperty("update_url")]
+        public string UpdateUrl { get; set; }
+        
+        [JsonProperty("post_id")]
+        public int? PostId { get; set; }
+    }
+    
+    public class ModdedReleaseUploadResponse : ModdedReleaseUploadRequest
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("mod_name")]
+        public string ModName { get; set; }
+
+        [JsonProperty("created_at")]
+        public DateTime CreatedAt { get; set; }
+    }
 }
